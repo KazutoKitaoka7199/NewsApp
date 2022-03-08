@@ -4,7 +4,8 @@ import axios from 'axios';
 import Constants from 'expo-constants';
 import ListItem from '../components/ListItem';
 
-export default function HomeScreens() {
+export default function HomeScreens(props) {
+  const { navigation } = props;
   const [articles, setArticles] = useState();
   useEffect(() => {
     fetchArticles();
@@ -19,6 +20,8 @@ export default function HomeScreens() {
     }
   };
 
+  const URL = `https://newsapi.org/v2/top-headlines?country=jp&category=business&apiKey=${Constants.manifest.extra.newsApiKey}`;
+
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
@@ -30,15 +33,14 @@ export default function HomeScreens() {
             imageUrl={item.urlToImage}
             title={item.title}
             auther={item.author}
+            onPress={() => navigation.navigate('Article', { article: item })}
           />
         )}
-        keyExtractor={(item, index) => index.toString()}
+        keyExtractor={(_item, index) => index.toString()}
       />
     </SafeAreaView>
   );
 }
-
-const URL = `https://newsapi.org/v2/top-headlines?country=jp&category=business&apiKey=${Constants.manifest.extra.newsApiKey}`;
 
 const styles = StyleSheet.create({
   container: {
