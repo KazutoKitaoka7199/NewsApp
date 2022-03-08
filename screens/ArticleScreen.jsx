@@ -12,7 +12,6 @@ const styles = StyleSheet.create({
 // functionではなく、アロー関数じゃないとうまく表示されない。
 const ArticleScreen = ({ route }) => {
   const { article } = route.params;
-  console.log(article);
   return (
     <SafeAreaView style={styles.container}>
       <WebView source={{ uri: article.url }} />
