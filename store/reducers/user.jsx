@@ -3,7 +3,7 @@ const initialState = {
 };
 
 const reducer = (action, state = initialState) => {
-  switch (action.type) {
+  switch (action) {
     case 'ADD_CLIP':
       return {
         ...state,
